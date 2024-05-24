@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id    String     @default(uuid()) @id
+  name  String? @unique
+  papers Paper[]
+}
+
+model Paper {
+  id    String     @default(uuid()) @id
+  name     String?
+  description   String?
+  applicationSphere String?
+  picture Bytes?
+  category    Category?    @relation(fields: [categoryId], references: [id])
+  categoryId  String? @default(uuid())
+  cargos Cargo[]
+}
+
+model Cargo {
+  id    String     @default(uuid()) @id
+  title     String?
+  weight     Int?
+  shortDescription     String?
+  articleNumber     String?
+  packageQuantity     BigInt?
+  description     String?
+  price     Float?
+  width     Float?
+  density     Float?
+  winding     Float?
+  packaging_type     String?
+  paper    Paper?    @relation(fields: [paperId], references: [id])
+  paperId  String? @default(uuid())
+  pictures Picture[]
+}
+
+model Picture {
+  id    String     @default(uuid()) @id
+  order     BigInt?
+  picture Bytes?
+  cargo    Cargo?    @relation(fields: [cargoId], references: [id])
+  cargoId  String? @default(uuid())
+  type    Type     @default(OTHER)
+}
+
+enum Type {
+  MAIN
+  TEXTURE
+  OTHER
+}
