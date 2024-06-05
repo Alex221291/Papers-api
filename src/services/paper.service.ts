@@ -63,19 +63,19 @@ export class PaperService {
   }
 
   async deletePaper(id: string): Promise<Paper> {
-    return this.prisma.paper.delete({
+    return await this.prisma.paper.delete({
       where: {id}
     });
   }
 
   async getById(id: string): Promise<Paper | null> {
-    return this.prisma.paper.findUnique({
+    return await this.prisma.paper.findUnique({
       where: {id},
     });
   }
 
   async getAll(categoryId?: string): Promise<Paper[]> {
-    return this.prisma.paper.findMany({
+    return await this.prisma.paper.findMany({
       where:{categoryId}
     });
   }

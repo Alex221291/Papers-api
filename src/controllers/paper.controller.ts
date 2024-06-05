@@ -27,16 +27,16 @@ import { PaperService } from 'src/services/paper.service';
   
     @Post('create')
     @UseInterceptors(FileInterceptor('file'))
-    async createPaper(@UploadedFile() file, @Query() paper: CreatePaperDto) {
+    async createPaper(@UploadedFile() file, @Body() paper: CreatePaperDto) {
       console.log(file);
       return await this.paperService.createPaper(file?.path, paper);
     }
 
     @Post('update')
     @UseInterceptors(FileInterceptor('file'))
-    async updatePaper(@UploadedFile() file, @Query() paper: UpdatePaperDto) {
+    async updatePaper(@UploadedFile() file, @Body() paper: UpdatePaperDto) {
       console.log(file);
-      return await this.paperService.createPaper(file?.path, paper);
+      return await this.paperService.updatePaper(file?.path, paper);
     }
 
     @Get('/:id')

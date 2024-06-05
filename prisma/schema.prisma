@@ -22,8 +22,8 @@ model Category {
 model Paper {
   id    String     @default(uuid()) @id
   name     String?
-  description   String?
-  applicationSphere String?
+  description   String? @db.VarChar(2000)
+  applicationSphere String? @db.VarChar(1000)
   picture Bytes?
   category    Category?    @relation(fields: [categoryId], references: [id])
   categoryId  String? @default(uuid())
@@ -32,17 +32,17 @@ model Paper {
 
 model Cargo {
   id    String     @default(uuid()) @id
-  title     String?
+  title     String? @db.VarChar(1000)
   weight     Int?
-  shortDescription     String?
+  shortDescription     String? @db.VarChar(500)
   articleNumber     String?
   packageQuantity     BigInt?
-  description     String?
+  description     String? @db.VarChar(2000)
   price     Float?
   width     Float?
   density     Float?
   winding     Float?
-  packaging_type     String?
+  packagingType     String?
   paper    Paper?    @relation(fields: [paperId], references: [id])
   paperId  String? @default(uuid())
   pictures Picture[]

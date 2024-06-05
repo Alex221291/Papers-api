@@ -1,82 +1,138 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from './prisma.service';
-import { Paper } from '@prisma/client';
+import { Cargo } from '@prisma/client';
 import { createReadStream } from 'fs';
-import { CreatePaperDto } from 'src/dto/paper/create-paper.dto';
-import { UpdatePaperDto } from 'src/dto/paper/update-paper.dto';
+import { CreateCargoDto } from 'src/dto/cargo/create-cargo.dto';
+import { UpdateCargoDto } from 'src/dto/cargo/update-cargo.dto';
+import { GetCargoDto } from 'src/dto/cargo/get-cargo.dto';
 
 @Injectable()
 export class CargoService {
   constructor(private prisma: PrismaService) {}
   
-  async createPaper(path?: string, data?: CreatePaperDto) : Promise<Paper> {
-    let fileData: Buffer;
-    if(path){
-      const fileStream = createReadStream(path);
-      const chunks = [];
-
-      for await (const chunk of fileStream) {
-        chunks.push(chunk);
-      }
-
-      fileData = Buffer.concat(chunks);
-    }
-    const paper = await this.prisma.paper.create({
+  async createCargo(paths?: string[], data?: CreateCargoDto) : Promise<Cargo> {
+    const cargo = await this.prisma.cargo.create({
       data: {
-        name: data?.name,
+        title: data?.title,
+        weight: data?.weight,
+        shortDescription: data?.shortDescription,
+        articleNumber: data?.articleNumber,
+        packageQuantity: data?.packageQuantity,
+
         description: data?.description,
-        applicationSphere: data?.applicationSphere,
-        categoryId: data?.categoryId,
-        picture: fileData,
+        price: data?.price,
+        width: data?.width,
+        density: data?.density,
+        winding: data?.winding,
+        packagingType: data?.packagingType,
+        paperId: data?.paperId
       },
     });
+    paths?.forEach(async path => {
+      let fileData: Buffer;
+      if(path){
+        const fileStream = createReadStream(path);
+        const chunks = [];
+  
+        for await (const chunk of fileStream) {
+          chunks.push(chunk);
+        }
+  
+        fileData = Buffer.concat(chunks);
 
-    return paper;
+        await this.prisma.picture.create({
+          data: {
+            picture: fileData,
+            cargoId : cargo.id
+          },
+        });
+      }
+    });
+
+    return cargo;
   }
 
-  async updatePaper(path?: string, data?: UpdatePaperDto) : Promise<Paper> {
-    let fileData: Buffer;
-    if(path){
-      const fileStream = createReadStream(path);
-      const chunks = [];
-
-      for await (const chunk of fileStream) {
-        chunks.push(chunk);
-      }
-
-      fileData = Buffer.concat(chunks);
-    }
-    const paper = await this.prisma.paper.update({
+  async updateCargo(paths?: string[], data?: UpdateCargoDto) : Promise<Cargo> {
+    const cargo = await this.prisma.cargo.update({
       where:{
         id: data.id
       },
       data: {
-        name: data?.name,
+        title: data?.title,
+        weight: data?.weight,
+        shortDescription: data?.shortDescription,
+        articleNumber: data?.articleNumber,
+        packageQuantity: data?.packageQuantity,
+
         description: data?.description,
-        applicationSphere: data?.applicationSphere,
-        categoryId: data?.categoryId,
-        picture: fileData,
+        price: data?.price,
+        width: data?.width,
+        density: data?.density,
+        winding: data?.winding,
+        packagingType: data?.packagingType,
+        paperId: data?.paperId
       },
     });
 
-    return paper;
+    await this.prisma.picture.deleteMany({
+      where : {
+        cargoId: data.id
+      }
+    })
+
+    paths?.forEach(async path => {
+      let fileData: Buffer;
+      if(path){
+        const fileStream = createReadStream(path);
+        const chunks = [];
+  
+        for await (const chunk of fileStream) {
+          chunks.push(chunk);
+        }
+  
+        fileData = Buffer.concat(chunks);
+      }
+      await this.prisma.picture.create({
+        data: {
+          picture: fileData,
+          cargoId : cargo.id
+        },
+      });
+    });
+
+    return cargo;
   }
 
-  async deletePaper(id: string): Promise<Paper> {
-    return this.prisma.paper.delete({
+  async deleteCargo(id: string): Promise<Cargo> {
+    await this.prisma.picture.deleteMany({
+      where : {
+        cargoId: id
+      }
+    })
+
+    return await this.prisma.cargo.delete({
       where: {id}
     });
   }
 
-  async getById(id: string): Promise<Paper | null> {
-    return this.prisma.paper.findUnique({
+  async getById(id: string): Promise<Cargo | null> {
+    return await this.prisma.cargo.findUnique({
+      include: {pictures: true},
       where: {id},
     });
   }
 
-  async getAll(categoryId?: string): Promise<Paper[]> {
-    return this.prisma.paper.findMany({
-      where:{categoryId}
+  async getAll(): Promise<any> { //GetCargoDto[]
+    const cargos = await this.prisma.cargo.findMany({
+      include: {
+        pictures: {
+          select: {
+            id: true,
+            type: true,
+          },
+        },
+      }
     });
+    return cargos;
   }
 }

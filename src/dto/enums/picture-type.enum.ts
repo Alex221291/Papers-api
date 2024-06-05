@@ -1,0 +1,1 @@
+export enum PictureType { MAIN, TEXTURE, OTHER };

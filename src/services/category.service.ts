@@ -8,13 +8,13 @@ export class CategoryService {
   constructor(private prisma: PrismaService) {}
 
   async getById(id: string): Promise<Category | null> {
-    return this.prisma.category.findUnique({
+    return await this.prisma.category.findUnique({
       where: {id},
     });
   }
 
   async getAll(): Promise<Category[]> {
-    return this.prisma.category.findMany({
+    return await this.prisma.category.findMany({
       include:{
         papers: true,
       }
@@ -22,20 +22,20 @@ export class CategoryService {
   }
 
   async createCategory(category: CreateCategotyDto): Promise<Category> {
-    return this.prisma.category.create({
+    return await this.prisma.category.create({
       data: category,
     });
   }
 
   async updateCategory(category: UpdateCategotyDto): Promise<Category> {
-    return this.prisma.category.update({
+    return await this.prisma.category.update({
       data: category,
       where: {id: category.id},
     });
   }
 
   async deleteCategory(id: string): Promise<Category> {
-    return this.prisma.category.delete({
+    return await this.prisma.category.delete({
       where: {id},
     });
   }

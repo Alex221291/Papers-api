@@ -11,8 +11,8 @@ CREATE TABLE `Category` (
 CREATE TABLE `Paper` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NULL,
-    `description` VARCHAR(191) NULL,
-    `applicationSphere` VARCHAR(191) NULL,
+    `description` VARCHAR(2000) NULL,
+    `applicationSphere` VARCHAR(1000) NULL,
     `picture` LONGBLOB NULL,
     `categoryId` VARCHAR(191) NULL,
 
@@ -22,17 +22,17 @@ CREATE TABLE `Paper` (
 -- CreateTable
 CREATE TABLE `Cargo` (
     `id` VARCHAR(191) NOT NULL,
-    `title` VARCHAR(191) NULL,
+    `title` VARCHAR(1000) NULL,
     `weight` INTEGER NULL,
-    `shortDescription` VARCHAR(191) NULL,
+    `shortDescription` VARCHAR(500) NULL,
     `articleNumber` VARCHAR(191) NULL,
     `packageQuantity` BIGINT NULL,
-    `description` VARCHAR(191) NULL,
+    `description` VARCHAR(2000) NULL,
     `price` DOUBLE NULL,
     `width` DOUBLE NULL,
     `density` DOUBLE NULL,
     `winding` DOUBLE NULL,
-    `packaging_type` VARCHAR(191) NULL,
+    `packagingType` VARCHAR(191) NULL,
     `paperId` VARCHAR(191) NULL,
 
     PRIMARY KEY (`id`)
