@@ -13,10 +13,10 @@ export class CreateCargoDto {
     readonly winding?: number;
     readonly packagingType?: string;
     readonly paperId?: string;
-    readonly picturesType?: PictureInfo[];
+    picturesType?: PictureInfo[];
 }
 
 export class PictureInfo {
     readonly name?: string;
-    readonly type?: PictureType;
+    readonly type?: string;
 }

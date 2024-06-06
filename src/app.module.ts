@@ -9,12 +9,13 @@ import { CargoService } from './services/cargo.service';
 import { PictureService } from './services/picrute.service';
 import { CargoController } from './controllers/cargo.controller';
 import { PictureController } from './controllers/picture.controller';
+import { FileService } from './services/file.service';
 
 @Module({
   imports: [MulterModule.register({
     dest: './uploads',
   }),],
   controllers: [CategoryController, PaperController, CargoController, PictureController],
-  providers: [CategoryService, PaperService, PrismaService, CargoService, PictureService],
+  providers: [CategoryService, PaperService, PrismaService, CargoService, PictureService, FileService],
 })
 export class AppModule {}

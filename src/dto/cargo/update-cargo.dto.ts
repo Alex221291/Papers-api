@@ -14,7 +14,7 @@ export class UpdateCargoDto {
     readonly winding?: number;
     readonly packagingType?: string;
     readonly paperId?: string;
-    readonly picturesType?: PictureInfo[];
+    picturesType?: PictureInfo[];
 }
 
 export class PictureInfo {

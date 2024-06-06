@@ -12,6 +12,7 @@ import {
 import { CategoryService } from 'src/services/category.service';
 import { CreateCategotyDto } from 'src/dto/category/create-category.dto';
 import { UpdateCategotyDto } from 'src/dto/category/update-category.dto';
+import { GetCategotyPapersDto } from 'src/dto/category/get-categoty-papers.dto';
   
   @ApiTags('Category')
   @Controller('category')
@@ -26,14 +27,12 @@ import { UpdateCategotyDto } from 'src/dto/category/update-category.dto';
     }
   
     @Get()
-    async getAll(): Promise<CategoryModel[]> {
+    async getAll(): Promise<GetCategotyPapersDto[]> {
       return this.categoryService.getAll();
     }
   
     @Post()
-    async createCategory(
-      @Body() categoryData: CreateCategotyDto,
-    ): Promise<CategoryModel> {
+    async createCategory(@Body() categoryData: CreateCategotyDto): Promise<CategoryModel> {
       return this.categoryService.createCategory(categoryData);
     }
   

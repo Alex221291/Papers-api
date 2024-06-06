@@ -1,16 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from './prisma.service';
-import { Cargo } from '@prisma/client';
+import { $Enums, Cargo } from '@prisma/client';
 import { createReadStream } from 'fs';
 import { CreateCargoDto } from 'src/dto/cargo/create-cargo.dto';
 import { UpdateCargoDto } from 'src/dto/cargo/update-cargo.dto';
-import { GetCargoDto } from 'src/dto/cargo/get-cargo.dto';
+import { PictureType } from 'src/dto/enums/picture-type.enum';
+import { json } from 'stream/consumers';
+import { FileService } from './file.service';
 
 @Injectable()
 export class CargoService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService, private fileService: FileService) {}
   
-  async createCargo(paths?: string[], data?: CreateCargoDto) : Promise<Cargo> {
+  async createCargo(filesInfo?: {path: string, name: string}[], data?: CreateCargoDto) : Promise<Cargo> {
     const cargo = await this.prisma.cargo.create({
       data: {
         title: data?.title,
@@ -28,10 +30,15 @@ export class CargoService {
         paperId: data?.paperId
       },
     });
-    paths?.forEach(async path => {
+
+    if (typeof data?.picturesType === 'string') {
+      data.picturesType = JSON.parse(data?.picturesType);
+    }
+
+    filesInfo?.forEach(async file => {
       let fileData: Buffer;
-      if(path){
-        const fileStream = createReadStream(path);
+      if(file.path){
+        const fileStream = createReadStream(file.path);
         const chunks = [];
   
         for await (const chunk of fileStream) {
@@ -39,20 +46,22 @@ export class CargoService {
         }
   
         fileData = Buffer.concat(chunks);
-
         await this.prisma.picture.create({
           data: {
             picture: fileData,
-            cargoId : cargo.id
+            cargoId : cargo.id,
+            type: $Enums.Type[data?.picturesType?.find(pictureType => pictureType.name == file?.name)?.type] || $Enums.Type[$Enums.Type.OTHER]
           },
         });
       }
+
+      await this.fileService.deleteFile(file?.path);
     });
 
     return cargo;
   }
 
-  async updateCargo(paths?: string[], data?: UpdateCargoDto) : Promise<Cargo> {
+  async updateCargo(filesInfo?: {path: string, name: string}[], data?: UpdateCargoDto) : Promise<Cargo> {
     const cargo = await this.prisma.cargo.update({
       where:{
         id: data.id
@@ -80,10 +89,14 @@ export class CargoService {
       }
     })
 
-    paths?.forEach(async path => {
+    if (typeof data?.picturesType === 'string') {
+      data.picturesType = JSON.parse(data?.picturesType);
+    }
+
+    filesInfo?.forEach(async file => {
       let fileData: Buffer;
-      if(path){
-        const fileStream = createReadStream(path);
+      if(file?.path){
+        const fileStream = createReadStream(file?.path);
         const chunks = [];
   
         for await (const chunk of fileStream) {
@@ -92,12 +105,16 @@ export class CargoService {
   
         fileData = Buffer.concat(chunks);
       }
+      
       await this.prisma.picture.create({
         data: {
           picture: fileData,
-          cargoId : cargo.id
+          cargoId : cargo.id,
+          type: $Enums.Type[data?.picturesType?.find(pictureType => pictureType.name == file?.name)?.type] || $Enums.Type[$Enums.Type.OTHER]
         },
       });
+
+      await this.fileService.deleteFile(file?.path);
     });
 
     return cargo;
@@ -122,7 +139,7 @@ export class CargoService {
     });
   }
 
-  async getAll(): Promise<any> { //GetCargoDto[]
+  async getAll(): Promise<Cargo[]> { //GetCargoDto[]
     const cargos = await this.prisma.cargo.findMany({
       include: {
         pictures: {

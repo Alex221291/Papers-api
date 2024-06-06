@@ -30,18 +30,28 @@ import { CargoService } from 'src/services/cargo.service';
 
     @Post('create')
     @UseInterceptors(FilesInterceptor('files'))
-    async createPaper(@UploadedFiles() files, @Body() cargo: CreateCargoDto): Promise<any> {
+    async createPaper(@UploadedFiles() files, @Body() cargo: CreateCargoDto): Promise<Cargo> {
       console.log(files);
-      const paths = files?.map(file => file?.path);
-      return await this.cargoService.createCargo(paths, cargo);
+      const filesInfo = files?.map(file => {
+        return {
+          path: file?.path,
+          name: file?.originalname
+        }
+      });
+      return await this.cargoService.createCargo(filesInfo, cargo);
     }
 
     @Post('update')
     @UseInterceptors(FilesInterceptor('files'))
-    async updatePaper(@UploadedFiles() files, @Body() cargo: UpdateCargoDto): Promise<any> {
+    async updatePaper(@UploadedFiles() files, @Body() cargo: UpdateCargoDto): Promise<Cargo> {
       console.log(files);
-      const paths = files?.map(file => file?.path);
-      return await this.cargoService.updateCargo(paths, cargo);
+      const filesInfo = files?.map(file => {
+        return {
+          path: file?.path,
+          name: file?.originalname
+        }
+      });
+      return await this.cargoService.updateCargo(filesInfo, cargo);
     }
 
     @Get('/:id')
@@ -50,7 +60,7 @@ import { CargoService } from 'src/services/cargo.service';
     }
   
     @Get()
-    async getAll(): Promise<any> { //GetCargoDto[]
+    async getAll(): Promise<Cargo[]> { //GetCargoDto[]
       return this.cargoService.getAll();
     }
 
