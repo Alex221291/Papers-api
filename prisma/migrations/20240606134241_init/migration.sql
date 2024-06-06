@@ -26,7 +26,7 @@ CREATE TABLE `Cargo` (
     `weight` INTEGER NULL,
     `shortDescription` VARCHAR(500) NULL,
     `articleNumber` VARCHAR(191) NULL,
-    `packageQuantity` BIGINT NULL,
+    `packageQuantity` INTEGER NULL,
     `description` VARCHAR(2000) NULL,
     `price` DOUBLE NULL,
     `width` DOUBLE NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `Cargo` (
 -- CreateTable
 CREATE TABLE `Picture` (
     `id` VARCHAR(191) NOT NULL,
-    `order` BIGINT NULL,
+    `order` INTEGER NULL,
     `picture` LONGBLOB NULL,
     `cargoId` VARCHAR(191) NULL,
     `type` ENUM('MAIN', 'TEXTURE', 'OTHER') NOT NULL DEFAULT 'OTHER',
