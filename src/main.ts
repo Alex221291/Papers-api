@@ -15,10 +15,11 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/api/docs', app, document);
   app.enableCors({
-    "origin": "*",
+    "origin": process.env.HOST_NAME,
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "allowedHeaders": 'Content-Type, Accept',
     "preflightContinue": false,
-    "optionsSuccessStatus": 204
+    "optionsSuccessStatus": 200
    });
 
   await app.listen(PORT, () => console.log(`Server started on port = ${PORT}`));
