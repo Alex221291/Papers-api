@@ -1,13 +1,20 @@
-name: Create Neon Branch with GitHub Actions Demo
-run-name: Create a Neon Branch
+name: сcreate-branch-neon
+
+on:
+  push:
+    branches: [ postgres-version ]
+
 jobs:
   Create-Neon-Branch:
-    uses: neondatabase/create-branch-action@v4
-    with:
-      project_id: rapid-haze-373089
-      parent_id: br-long-forest-224191
-      branch_name: from_action_reusable
-      api_key: {{ secrets.NEON_API_KEY }}
-    id: create-branch
-  - run: echo project_id ${{ steps.create-branch.outputs.project_id}}
-  - run: echo branch_id ${{ steps.create-branch.outputs.branch_id}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create a Neon Branch
+        uses: neondatabase/create-branch-action@v4
+        id: create-branch
+        with:
+          project_id: rapid-haze-373089
+          parent_id: br-long-forest-224191
+          branch_name: from_action_reusable
+          api_key: ${{ secrets.NEON_API_KEY }}
+      - run: echo project_id ${{ steps.create-branch.outputs.project_id}}
+      - run: echo branch_id ${{ steps.create-branch.outputs.branch_id}}
