@@ -1,9 +1,9 @@
-INSERT INTO `Category` (id, name)
+INSERT INTO "Category" (id, name)
 VALUES ('327df335-b73f-4bcb-970a-cc26ece8f32b', 'Технические виды бумаг');
-INSERT INTO `Category` (id, name)
+INSERT INTO "Category" (id, name)
 VALUES ('17a05bf0-581c-4fe9-bc9d-e3c547d6d3ca', 'Упаковочные виды бумаг');
 
-INSERT INTO `Paper` (id, name, description, applicationSphere, picture, categoryId)
+INSERT INTO "Paper" (id, name, description, "applicationSphere", picture, "categoryId")
 VALUES ('17826f6b-14de-4815-83d8-b092c7381946', 'Калька', null,
 'Калька бумажная 40 гр, 52 гр, 60 гр, 80 гр@#$Калька для дизайнерских работ@#$Калька под карандаш',
 null, '327df335-b73f-4bcb-970a-cc26ece8f32b'),
@@ -15,14 +15,14 @@ null, '327df335-b73f-4bcb-970a-cc26ece8f32b'),
 для создания интересных зарисовок и эскизов.@#$Карандаш@#$Ручка',
 null, '327df335-b73f-4bcb-970a-cc26ece8f32b');
 
-INSERT INTO `Paper` (id, name, description, applicationSphere, picture, categoryId)
+INSERT INTO "Paper" (id, name, description, "applicationSphere", picture, "categoryId")
 VALUES ('79ea5405-125a-4f7b-82a8-e1628870d920', 'Для упаковки жировлагосодержа-щих продуктов', 'Предлагается в рулонах и листах',
 'Имеет декларацию соответствия',
 null, '17a05bf0-581c-4fe9-bc9d-e3c547d6d3ca'),
 ('ad30ecbb-6916-45e7-92d8-f266133d9891', 'Подпергамент', 'Также представлена в виде рулонов и листов различных форматов',
 '', null, '17a05bf0-581c-4fe9-bc9d-e3c547d6d3ca');
 
-INSERT INTO `Cargo` (id, title, weight, shortDescription, articleNumber, packageQuantity, description, price, width, density, winding, packagingType, paperId)
+INSERT INTO "Cargo" (id, title, weight, "shortDescription", "articleNumber", "packageQuantity", description, price, width, density, winding, "packagingType", "paperId")
 VALUES ('8c0135cc-0f0f-4b85-9ea5-a94a1cdd1b05', 'Калька бумажная 40 гр.', 40, 'Калька бумажная м.40 ф.420 по 20 м', 'К45/7*10', 25, 
 'Калька – это универсальная полупрозрачная бумага достаточно высокой плотности, которая используется для создания графиков, чертежей, эскизов, выкроек, планов, а также для копирования документов и изображения без применения копировальной машины или ручного труда. Калька прекрасно подходит для печати на плоттере и благодаря своей плотности не сминается и не застревает между барабанами. Также может использоваться с лазерными и струйными принтерами. Для производства кальки используется высококачественное целлюлозное сырье, которое еще в процессе изготовления бумаги увлажняется и пропитывается составами, придающими бумаге прозрачность. Итоговая продукция имеет среднюю плотность, схожую с обычной офсетной бумагой – 60 грамм на метр квадратный. Ширина рулона составляет 610 мм, внутренний диаметр втулки стандартный – 50 мм.', 
 90, 42, 30, 42, 'в рулоне', '17826f6b-14de-4815-83d8-b092c7381946'),
@@ -42,12 +42,12 @@ VALUES ('8c0135cc-0f0f-4b85-9ea5-a94a1cdd1b05', 'Калька бумажная 4
 'Калька – это универсальная полупрозрачная бумага достаточно высокой плотности, которая используется для создания графиков, чертежей, эскизов, выкроек, планов, а также для копирования документов и изображения без применения копировальной машины или ручного труда. Калька прекрасно подходит для печати на плоттере и благодаря своей плотности не сминается и не застревает между барабанами. Также может использоваться с лазерными и струйными принтерами. Для производства кальки используется высококачественное целлюлозное сырье, которое еще в процессе изготовления бумаги увлажняется и пропитывается составами, придающими бумаге прозрачность. Итоговая продукция имеет среднюю плотность, схожую с обычной офсетной бумагой – 60 грамм на метр квадратный. Ширина рулона составляет 610 мм, внутренний диаметр втулки стандартный – 50 мм.', 
 90, 42, 30, 42, 'в рулоне', '17826f6b-14de-4815-83d8-b092c7381946');
 
-INSERT INTO `Cargo` (id, title, weight, shortDescription, articleNumber, packageQuantity, description, price, width, density, winding, packagingType, paperId)
+INSERT INTO "Cargo" (id, title, weight, "shortDescription", "articleNumber", "packageQuantity", description, price, width, density, winding, "packagingType", "paperId")
 VALUES ('c102bf58-95e6-43e7-bcea-2964a5ce6f1f', 'Бумага-крат 70 гр.', 70, 'Бумага мешочная в рулоне (крафт)ф.840х10 плотность 70 г/м²', 'К45/7*10', 15, 
 'Бумага мешочная в рулоне (крафт)ф.840х10 плотность 70 г/м²', 
 90, 42, 30, 42, 'в рулоне', '8fa5219a-4da3-4c9e-8060-64b67bc1c0fa');
 
-INSERT INTO `Picture` (id, `order`, picture, cargoId, type)
+INSERT INTO "Picture" (id, "order", picture, "cargoId", type)
 VALUES ('7c38031d-66df-4bea-bb54-1391b386b095', 0, null, '8c0135cc-0f0f-4b85-9ea5-a94a1cdd1b05', 'MAIN'),
 ('dd7f2cd0-7ef9-498e-8657-c1059727b5a8', 0, null, '8c0135cc-0f0f-4b85-9ea5-a94a1cdd1b05', 'TEXTURE'),
 ('13a5e1bc-62e1-4528-a7b3-e86d5a1f0c82', 0, null, '6dc620f8-46db-4917-a66e-47137c5c55f2', 'MAIN'),
