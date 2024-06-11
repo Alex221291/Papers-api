@@ -12,7 +12,7 @@ jobs:
         uses: neondatabase/create-branch-action@v4
         id: create-branch
         with:
-          project_id: rapid-haze-373089
+          project_id: crimson-glitter-42949889
           database: papers
           branch_name: from_action_reusable
           username: papers_owner
