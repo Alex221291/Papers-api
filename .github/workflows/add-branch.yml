@@ -1,4 +1,4 @@
-name: сcreate-branch-neon
+name: create-branch-neon
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
         id: create-branch
         with:
           project_id: rapid-haze-373089
-          parent_id: br-long-forest-224191
+          parent: br-long-forest-224191
           branch_name: from_action_reusable
           api_key: ${{ secrets.NEON_API_KEY }}
       - run: echo project_id ${{ steps.create-branch.outputs.project_id}}
