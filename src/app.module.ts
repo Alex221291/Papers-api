@@ -10,12 +10,13 @@ import { PictureService } from './services/picrute.service';
 import { CargoController } from './controllers/cargo.controller';
 import { PictureController } from './controllers/picture.controller';
 import { FileService } from './services/file.service';
+import { AppController } from './controllers/app.controller';
 
 @Module({
   imports: [MulterModule.register({
     dest: './uploads',
   }),],
-  controllers: [CategoryController, PaperController, CargoController, PictureController],
+  controllers: [CategoryController, PaperController, CargoController, PictureController, AppController],
   providers: [CategoryService, PaperService, PrismaService, CargoService, PictureService, FileService],
 })
 export class AppModule {}
