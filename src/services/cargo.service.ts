@@ -139,8 +139,9 @@ export class CargoService {
     });
   }
 
-  async getAll(): Promise<Cargo[]> { //GetCargoDto[]
+  async getAll(paperId?: string): Promise<Cargo[]> { //GetCargoDto[]
     const cargos = await this.prisma.cargo.findMany({
+      where:{paperId},
       include: {
         pictures: {
           select: {

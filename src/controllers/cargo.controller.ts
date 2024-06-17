@@ -60,8 +60,8 @@ import { CargoService } from 'src/services/cargo.service';
     }
   
     @Get()
-    async getAll(): Promise<Cargo[]> { //GetCargoDto[]
-      return this.cargoService.getAll();
+    async getAll(@Query('paperId') paperId?: string): Promise<Cargo[]> { //GetCargoDto[]
+      return this.cargoService.getAll(paperId);
     }
 
     @Delete('/:id')
