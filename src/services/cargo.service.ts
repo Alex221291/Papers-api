@@ -164,7 +164,7 @@ export class CargoService {
       },
     });
     
-    return uniqueWeights.map(entry => entry.weight);
+    return uniqueWeights.map(entry => entry.weight).sort((a, b) => a - b);
   }
 
 }
