@@ -154,13 +154,14 @@ export class CargoService {
     return cargos;
   }
 
-  async getWeights(): Promise<number[]> { 
+  async getWeights(paperId?: string): Promise<number[]> { 
     const uniqueWeights = await this.prisma.cargo.groupBy({
       by: ['weight'],
       where: {
         weight: {
           not: null, // если вы хотите исключить null значения
         },
+        paperId
       },
     });
     

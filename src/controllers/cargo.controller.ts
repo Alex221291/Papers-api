@@ -55,8 +55,8 @@ import { CargoService } from 'src/services/cargo.service';
     }
 
     @Get('weights')
-    async getWeights(): Promise<number[]> {
-      return await this.cargoService.getWeights();
+    async getWeights(@Query('paperId') paperId?: string): Promise<number[]> {
+      return await this.cargoService.getWeights(paperId);
     }
 
     @Get('/:id')
