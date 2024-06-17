@@ -153,4 +153,18 @@ export class CargoService {
     });
     return cargos;
   }
+
+  async getWeights(): Promise<number[]> { 
+    const uniqueWeights = await this.prisma.cargo.groupBy({
+      by: ['weight'],
+      where: {
+        weight: {
+          not: null, // если вы хотите исключить null значения
+        },
+      },
+    });
+    
+    return uniqueWeights.map(entry => entry.weight);
+  }
+
 }

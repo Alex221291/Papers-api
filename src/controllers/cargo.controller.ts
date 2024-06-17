@@ -54,19 +54,23 @@ import { CargoService } from 'src/services/cargo.service';
       return await this.cargoService.updateCargo(filesInfo, cargo);
     }
 
+    @Get('weights')
+    async getWeights(): Promise<number[]> {
+      return await this.cargoService.getWeights();
+    }
+
     @Get('/:id')
     async getPostById(@Param('id') id: string): Promise<Cargo> {
-      return this.cargoService.getById(id);
+      return await this.cargoService.getById(id);
     }
   
     @Get()
     async getAll(@Query('paperId') paperId?: string): Promise<Cargo[]> { //GetCargoDto[]
-      return this.cargoService.getAll(paperId);
+      return await this.cargoService.getAll(paperId);
     }
 
     @Delete('/:id')
     async deleteCargo(@Param('id') id: string): Promise<Cargo> {
-      return this.cargoService.deleteCargo(id);
+      return await this.cargoService.deleteCargo(id);
     }
-
   }
