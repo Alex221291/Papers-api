@@ -19,7 +19,9 @@ export class NewsService {
   }
 
   async getAll(): Promise<News[]> {
-    return await this.prisma.news.findMany({});
+    return await this.prisma.news.findMany({orderBy: {
+      date: 'desc'
+    }});
   }
 
   async createNews(path?: string, news?: CreateNewsDto): Promise<News> {

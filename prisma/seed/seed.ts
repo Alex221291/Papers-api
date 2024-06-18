@@ -3,25 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 const prisma = new PrismaClient()
 async function main() {
-  // const category1 = await prisma.category.upsert({
-  //     where: { name: 'Технические виды бумаг' },
-  //     update: {},
-  //     create: {
-  //       name: 'Технические виды бумаг'
-  //     },
-  //   })
-  // const category2 = await prisma.category.upsert({
-  //     where: { name: 'Упаковочные виды бумаг' },
-  //     update: {},
-  //     create: {
-  //     name: 'Упаковочные виды бумаг'
-  //     },
-  // })
-  // console.log({ category1, category2 })
-// ���� � ����� �� ������� NestJS
-console.log(__dirname);
-  // ������ ����� ��� �������� ������
-  //const fileBuffer = fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/paper.png'));
+  console.log(__dirname);
   await prisma.paper.upsert({
     where: { id: '17826f6b-14de-4815-83d8-b092c7381946', picture: null },
     update: {
@@ -101,6 +83,39 @@ console.log(__dirname);
     data: {
       picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/kalka-texture.png')),
     }
+  });
+
+  //NEWS
+  await prisma.picture.upsert({
+    where: { id: 'b486a497-82aa-419a-9921-b3a567fff653', picture: null },
+    update: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/news-1.png')),
+    },
+    create: {},
+  });
+
+  await prisma.picture.upsert({
+    where: { id: '13d88676-f686-462e-840b-e868294b47fb', picture: null },
+    update: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/news-2.png')),
+    },
+    create: {},
+  });
+
+  await prisma.picture.upsert({
+    where: { id: '7b4a066d-2876-4444-a318-4945dfa967f6', picture: null },
+    update: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/news-3.png')),
+    },
+    create: {},
+  });
+
+  await prisma.picture.upsert({
+    where: { id: '74e53ba1-c891-4f52-81a3-0cc609be4ac0', picture: null },
+    update: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/news-4.png')),
+    },
+    create: {},
   });
 }
 main()
