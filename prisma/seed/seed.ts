@@ -4,41 +4,36 @@ import * as fs from 'fs';
 const prisma = new PrismaClient()
 async function main() {
   console.log(__dirname);
-  await prisma.paper.upsert({
+  await prisma.paper.updateMany({
     where: { id: '17826f6b-14de-4815-83d8-b092c7381946', picture: null },
-    update: {
+    data: {
       picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/kalka.png')),
-    },
-    create: {},
+    }
   });
-  await prisma.paper.upsert({
+  await prisma.paper.updateMany({
     where: { id: '870cd1ef-b2c8-4329-8deb-5793b5499674', picture: null },
-    update: {
+    data: {
       picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/vatman.png')),
-    },
-    create: {},
+    }
   });
-  await prisma.paper.upsert({
+  await prisma.paper.updateMany({
     where: { id: '79ea5405-125a-4f7b-82a8-e1628870d920', picture: null },
-    update: {
+    data: {
       picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/upakovka.png')),
-    },
-    create: {},
+    }
   });
-  await prisma.paper.upsert({
+  await prisma.paper.updateMany({
     where: { id: 'ad30ecbb-6916-45e7-92d8-f266133d9891', picture: null },
-    update: {
+    data: {
       picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/pergament.png')),
-    },
-    create: {},
+    }
   });
   
-  await prisma.paper.upsert({
+  await prisma.paper.updateMany({
     where: { id: '8fa5219a-4da3-4c9e-8060-64b67bc1c0fa', picture: null },
-    update: {
+    data: {
       picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/pergament.png')),
-    },
-    create: {},
+    }
   });
 
   await prisma.picture.updateMany({
@@ -86,36 +81,32 @@ async function main() {
   });
 
   //NEWS
-  await prisma.picture.upsert({
+  await prisma.picture.updateMany({
     where: { id: 'b486a497-82aa-419a-9921-b3a567fff653', picture: null },
-    update: {
+    data: {
       picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/news-1.png')),
-    },
-    create: {},
+    }
   });
 
-  await prisma.picture.upsert({
+  await prisma.picture.updateMany({
     where: { id: '13d88676-f686-462e-840b-e868294b47fb', picture: null },
-    update: {
+    data: {
       picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/news-2.png')),
-    },
-    create: {},
+    }
   });
 
-  await prisma.picture.upsert({
+  await prisma.picture.updateMany({
     where: { id: '7b4a066d-2876-4444-a318-4945dfa967f6', picture: null },
-    update: {
+    data: {
       picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/news-3.png')),
-    },
-    create: {},
+    }
   });
 
-  await prisma.picture.upsert({
+  await prisma.picture.updateMany({
     where: { id: '74e53ba1-c891-4f52-81a3-0cc609be4ac0', picture: null },
-    update: {
+    data: {
       picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/news-4.png')),
-    },
-    create: {},
+    }
   });
 }
 main()
