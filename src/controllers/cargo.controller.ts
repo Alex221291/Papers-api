@@ -60,12 +60,12 @@ import { CargoService } from 'src/services/cargo.service';
     }
 
     @Get('/:id')
-    async getPostById(@Param('id') id: string): Promise<Cargo> {
+    async getPostById(@Param('id') id: string): Promise<GetCargoDto> {
       return await this.cargoService.getById(id);
     }
   
     @Get()
-    async getAll(@Query('paperId') paperId?: string): Promise<Cargo[]> { //GetCargoDto[]
+    async getAll(@Query('paperId') paperId?: string): Promise<GetCargoDto[]> {
       return await this.cargoService.getAll(paperId);
     }
 

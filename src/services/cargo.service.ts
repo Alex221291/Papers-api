@@ -7,6 +7,7 @@ import { UpdateCargoDto } from 'src/dto/cargo/update-cargo.dto';
 import { PictureType } from 'src/dto/enums/picture-type.enum';
 import { json } from 'stream/consumers';
 import { FileService } from './file.service';
+import { GetCargoDto } from 'src/dto/cargo/get-cargo.dto';
 
 @Injectable()
 export class CargoService {
@@ -132,26 +133,74 @@ export class CargoService {
     });
   }
 
-  async getById(id: string): Promise<Cargo | null> {
-    return await this.prisma.cargo.findUnique({
-      include: {pictures: true},
+  async getById(id: string): Promise<GetCargoDto> {
+    const data = await this.prisma.cargo.findUnique({
+      include: {pictures: {
+        select: {
+          id: true,
+          order: true
+        },
+        orderBy: {
+          order: 'asc'
+        }
+      },},
       where: {id},
     });
+
+    return {
+      id : data?.id,
+      title: data?.title,
+      weight: data?.weight,
+      shortDescription: data?.shortDescription,
+      articleNumber: data?.articleNumber,
+      packageQuantity: data?.packageQuantity,
+
+      description: data?.description,
+      price: data?.price,
+      width: data?.width,
+      density: data?.density,
+      winding: data?.winding,
+      packagingType: data?.packagingType,
+      paperId: data?.paperId,
+      pictures: data?.pictures?.map(picture => picture?.id),
+    }
   }
 
-  async getAll(paperId?: string): Promise<Cargo[]> { //GetCargoDto[]
+  async getAll(paperId?: string): Promise<GetCargoDto[]> {
     const cargos = await this.prisma.cargo.findMany({
       where:{paperId},
       include: {
         pictures: {
           select: {
             id: true,
-            type: true,
+            order: true
           },
+          orderBy: {
+            order: 'asc'
+          }
         },
       }
     });
-    return cargos;
+    
+    return cargos?.map(data => {
+      return {
+        id : data?.id,
+        title: data?.title,
+        weight: data?.weight,
+        shortDescription: data?.shortDescription,
+        articleNumber: data?.articleNumber,
+        packageQuantity: data?.packageQuantity,
+
+        description: data?.description,
+        price: data?.price,
+        width: data?.width,
+        density: data?.density,
+        winding: data?.winding,
+        packagingType: data?.packagingType,
+        paperId: data?.paperId,
+        pictures: data?.pictures?.map(picture => picture?.id),
+      }
+    });
   }
 
   async getWeights(paperId?: string): Promise<number[]> { 
