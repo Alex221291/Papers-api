@@ -34,4 +34,13 @@ export class PictureService {
       return picture.picture
     });
   }
+
+  async getBuffer(pictureId?: string): Promise<Buffer> {
+
+    const picture = await this.prisma.picture.findUnique({
+      where: {id: pictureId},
+    });
+
+    return picture?.picture;
+  }
 }
