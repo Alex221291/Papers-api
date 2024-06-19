@@ -17,4 +17,21 @@ export class PictureService {
 
     return await this.prisma.picture.findMany(params);
   }
+
+  async getBuffers(pictureIds?: string[]): Promise<Buffer[]> {
+    let params = {};
+    if(pictureIds && pictureIds.length != 0)
+      params = {
+        where:{id : {
+          in : pictureIds
+        }},
+        select:{
+          picture: true
+        }
+      };
+
+    return (await this.prisma.picture.findMany(params)).map(picture => {
+      return picture.picture
+    });
+  }
 }
