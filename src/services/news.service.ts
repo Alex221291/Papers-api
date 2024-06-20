@@ -12,16 +12,35 @@ export class NewsService {
     private fileService: FileService
   ) {}
 
-  async getById(id: string): Promise<News | null> {
-    return await this.prisma.news.findUnique({
+  async getById(id: string): Promise<GetNewsDto | null> {
+    const answer =  await this.prisma.news.findUnique({
       where: {id},
     });
+    if(!answer) return null;
+
+    return {
+      id: answer?.id,
+      title: answer?.title,
+      description: answer?.description,
+      date: answer?.date.toLocaleDateString('ru-RU').replaceAll('.', '-'),
+      pictureId: answer?.pictureId,
+    };
   }
 
-  async getAll(): Promise<News[]> {
-    return await this.prisma.news.findMany({orderBy: {
+  async getAll(): Promise<GetNewsDto[]> {
+    const news =  await this.prisma.news.findMany({orderBy: {
       date: 'desc'
     }});
+
+    return news?.map(item => {
+      return {
+        id: item?.id,
+        title: item?.title,
+        description: item?.description,
+        date: item?.date.toLocaleDateString('ru-RU').replaceAll('.', '-'),
+        pictureId: item?.pictureId,
+      }
+    })
   }
 
   async createNews(fileInfo?: {path: string, type: string}, news?: CreateNewsDto): Promise<News> {

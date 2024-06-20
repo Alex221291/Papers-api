@@ -13,6 +13,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
 import { News, Paper } from '@prisma/client';
 import { CreateNewsDto } from 'src/dto/news/create-news.dto';
+import { GetNewsDto } from 'src/dto/news/get-news.dto';
 import { UpdateNewsDto } from 'src/dto/news/update-news.dto';
 import { CreatePaperDto } from 'src/dto/paper/create-paper.dto';
 import { GetPaperDto } from 'src/dto/paper/get-paper.dto';
@@ -44,12 +45,12 @@ import { PaperService } from 'src/services/paper.service';
     }
 
     @Get('/:id')
-    async getPostById(@Param('id') id: string): Promise<News> {
+    async getPostById(@Param('id') id: string): Promise<GetNewsDto> {
       return this.newsService.getById(id);
     }
   
     @Get()
-    async getAll(): Promise<News[]> {
+    async getAll(): Promise<GetNewsDto[]> {
       return this.newsService.getAll();
     }
 
