@@ -1,8 +1,6 @@
 import {
     Controller,
     Get,
-    Body,
-    Res,
     StreamableFile,
     Header,
     Param,
@@ -25,13 +23,15 @@ import { Readable } from 'stream';
     @Header('Cache-Control', 'none')
     async get(@Param('id') pictureId: string): Promise<StreamableFile> {
       try {
-        const buffer = await this.pictureService.getBuffer(pictureId); // Здесь получите изображение из базы данных или другого источника
-          
+        const picture = await this.pictureService.getBuffer(pictureId); // Здесь получите изображение из базы данных или другого источника
+        if(!picture?.picture)
+          throw new Error('Изображение не найдено');
+
         const readableStream = new Readable();
-        readableStream.push(buffer);
+        readableStream.push(picture.picture);
         readableStream.push(null);
 
-        return new StreamableFile(readableStream, { type: 'image/png' });
+        return new StreamableFile(readableStream, { type: picture.type });
       } catch (error) {
         throw new Error('Ошибка при получении изображения');
       }

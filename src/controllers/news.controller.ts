@@ -31,7 +31,7 @@ import { PaperService } from 'src/services/paper.service';
     @UseInterceptors(FileInterceptor('file'))
     async createPaper(@UploadedFile() file, @Body() news: CreateNewsDto) {
       console.log(file);
-      const result = await this.newsService.createNews(file?.path, news)
+      const result = await this.newsService.createNews({path: file?.path, type: file?.mimetype}, news)
       return result;
     }
 
@@ -39,7 +39,7 @@ import { PaperService } from 'src/services/paper.service';
     @UseInterceptors(FileInterceptor('file'))
     async updatePaper(@UploadedFile() file, @Body() news: UpdateNewsDto) {
       console.log(file);
-      const result = await this.newsService.updateNews(file?.path, news);
+      const result = await this.newsService.updateNews({path: file?.path, type: file?.mimetype}, news);
       return result;
     }
 

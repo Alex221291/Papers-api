@@ -54,14 +54,8 @@ model Picture {
   picture Bytes?
   cargo    Cargo?    @relation(fields: [cargoId], references: [id])
   cargoId  String? @default(uuid())
-  type    Type     @default(OTHER)
+  type    String?
   news News[]
-}
-
-enum Type {
-  MAIN
-  TEXTURE
-  OTHER
 }
 
 model News {

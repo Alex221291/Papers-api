@@ -1,6 +1,3 @@
--- CreateEnum
-CREATE TYPE "Type" AS ENUM ('MAIN', 'TEXTURE', 'OTHER');
-
 -- CreateTable
 CREATE TABLE "Category" (
     "id" TEXT NOT NULL,
@@ -46,9 +43,20 @@ CREATE TABLE "Picture" (
     "order" INTEGER,
     "picture" BYTEA,
     "cargoId" TEXT,
-    "type" "Type" NOT NULL DEFAULT 'OTHER',
+    "type" TEXT,
 
     CONSTRAINT "Picture_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "News" (
+    "id" TEXT NOT NULL,
+    "title" TEXT,
+    "description" VARCHAR(3000),
+    "date" DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "pictureId" TEXT,
+
+    CONSTRAINT "News_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -62,3 +70,6 @@ ALTER TABLE "Cargo" ADD CONSTRAINT "Cargo_paperId_fkey" FOREIGN KEY ("paperId") 
 
 -- AddForeignKey
 ALTER TABLE "Picture" ADD CONSTRAINT "Picture_cargoId_fkey" FOREIGN KEY ("cargoId") REFERENCES "Cargo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "News" ADD CONSTRAINT "News_pictureId_fkey" FOREIGN KEY ("pictureId") REFERENCES "Picture"("id") ON DELETE SET NULL ON UPDATE CASCADE;

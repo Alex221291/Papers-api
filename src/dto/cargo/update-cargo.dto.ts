@@ -1,5 +1,3 @@
-import { PictureType } from "../enums/picture-type.enum";
-
 export class UpdateCargoDto {
     readonly id: string;
     readonly title?: string;
@@ -14,10 +12,4 @@ export class UpdateCargoDto {
     readonly winding?: number;
     readonly packagingType?: string;
     readonly paperId?: string;
-    picturesType?: PictureInfo[];
-}
-
-export class PictureInfo {
-    readonly name?: string;
-    readonly type?: PictureType;
 }

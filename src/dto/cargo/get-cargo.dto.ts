@@ -1,5 +1,3 @@
-import { PictureType } from "../enums/picture-type.enum";
-
 export class GetCargoDto {
     readonly id?: string;
     readonly title?: string;

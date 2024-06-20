@@ -35,7 +35,7 @@ import { CargoService } from 'src/services/cargo.service';
       const filesInfo = files?.map(file => {
         return {
           path: file?.path,
-          name: file?.originalname
+          type: file?.mimetype
         }
       });
       return await this.cargoService.createCargo(filesInfo, cargo);
@@ -48,7 +48,7 @@ import { CargoService } from 'src/services/cargo.service';
       const filesInfo = files?.map(file => {
         return {
           path: file?.path,
-          name: file?.originalname
+          type: file?.mimetype
         }
       });
       return await this.cargoService.updateCargo(filesInfo, cargo);
