@@ -25,7 +25,7 @@ import { CargoService } from 'src/services/cargo.service';
     ) {}
 
     @Post('create')
-    @UseInterceptors(FilesInterceptor('files'))
+    @UseInterceptors(FilesInterceptor('files[]'))
     async createPaper(@UploadedFiles() files: Express.Multer.File[], @Body() cargo: CreateCargoDto): Promise<Cargo> {
       console.log(cargo);
       console.log(files);
@@ -39,7 +39,7 @@ import { CargoService } from 'src/services/cargo.service';
     }
 
     @Post('update')
-    @UseInterceptors(FilesInterceptor('files'))
+    @UseInterceptors(FilesInterceptor('files[]'))
     async updatePaper(@UploadedFiles() files: Express.Multer.File[], @Body() cargo: UpdateCargoDto): Promise<Cargo> {
       console.log(files);
       const filesInfo = files?.map(file => {
