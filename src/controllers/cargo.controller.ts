@@ -31,6 +31,7 @@ import { CargoService } from 'src/services/cargo.service';
     @Post('create')
     @UseInterceptors(FilesInterceptor('files'))
     async createPaper(@UploadedFiles() files, @Body() cargo: CreateCargoDto): Promise<Cargo> {
+      console.log(cargo);
       console.log(files);
       const filesInfo = files?.map(file => {
         return {

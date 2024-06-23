@@ -1,14 +1,14 @@
 export class CreateCargoDto {
     readonly title?: string;
-    readonly weight?: number;
+    readonly weight?: string;
     readonly shortDescription?: string;
     readonly articleNumber?: string;
-    readonly packageQuantity?: number;
+    readonly packageQuantity?: string;
     readonly description?: string;
-    readonly price?: number;
-    readonly width?: number;
-    readonly density?: number;
-    readonly winding?: number;
+    readonly price?: string;
+    readonly width?: string;
+    readonly density?: string;
+    readonly winding?: string;
     readonly packagingType?: string;
     readonly paperId?: string;
 }

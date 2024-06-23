@@ -15,16 +15,16 @@ export class CargoService {
     const cargo = await this.prisma.cargo.create({
       data: {
         title: data?.title,
-        weight: data?.weight,
+        weight: parseInt(data?.weight, 10),
         shortDescription: data?.shortDescription,
         articleNumber: data?.articleNumber,
-        packageQuantity: data?.packageQuantity,
+        packageQuantity: parseInt(data?.packageQuantity, 10),
 
         description: data?.description,
-        price: data?.price,
-        width: data?.width,
-        density: data?.density,
-        winding: data?.winding,
+        price: parseFloat(data?.price),
+        width: parseFloat(data?.width),
+        density: parseFloat(data?.density),
+        winding: parseFloat(data?.winding),
         packagingType: data?.packagingType,
         paperId: data?.paperId
       },
