@@ -4,21 +4,17 @@ import {
     Param,
     Post,
     Body,
-    Put,
     Delete,
     UseInterceptors,
-    UploadedFiles,
     Query,
-    UploadedFile,
   } from '@nestjs/common';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+  import { UploadedFiles } from '@nestjs/common';
+  import { FilesInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
-import { Cargo, Paper } from '@prisma/client';
+import { Cargo } from '@prisma/client';
 import { CreateCargoDto } from 'src/dto/cargo/create-cargo.dto';
 import { GetCargoDto } from 'src/dto/cargo/get-cargo.dto';
 import { UpdateCargoDto } from 'src/dto/cargo/update-cargo.dto';
-import { CreatePaperDto } from 'src/dto/paper/create-paper.dto';
-import { UpdatePaperDto } from 'src/dto/paper/update-paper.dto';
 import { CargoService } from 'src/services/cargo.service';
   
   @ApiTags('Cargo')
@@ -30,7 +26,7 @@ import { CargoService } from 'src/services/cargo.service';
 
     @Post('create')
     @UseInterceptors(FilesInterceptor('files'))
-    async createPaper(@UploadedFiles() files, @Body() cargo: CreateCargoDto): Promise<Cargo> {
+    async createPaper(@UploadedFiles() files: Express.Multer.File[], @Body() cargo: CreateCargoDto): Promise<Cargo> {
       console.log(cargo);
       console.log(files);
       const filesInfo = files?.map(file => {
@@ -44,7 +40,7 @@ import { CargoService } from 'src/services/cargo.service';
 
     @Post('update')
     @UseInterceptors(FilesInterceptor('files'))
-    async updatePaper(@UploadedFiles() files, @Body() cargo: UpdateCargoDto): Promise<Cargo> {
+    async updatePaper(@UploadedFiles() files: Express.Multer.File[], @Body() cargo: UpdateCargoDto): Promise<Cargo> {
       console.log(files);
       const filesInfo = files?.map(file => {
         return {

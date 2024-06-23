@@ -7,8 +7,8 @@ import {
     Put,
     Delete,
   } from '@nestjs/common';
-  import { Category as CategoryModel} from '@prisma/client';
-  import { ApiTags } from '@nestjs/swagger';
+import { Category as CategoryModel} from '@prisma/client';
+import { ApiTags } from '@nestjs/swagger';
 import { CategoryService } from 'src/services/category.service';
 import { CreateCategotyDto } from 'src/dto/category/create-category.dto';
 import { UpdateCategotyDto } from 'src/dto/category/update-category.dto';
