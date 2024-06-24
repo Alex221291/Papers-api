@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -54,11 +54,15 @@ model Picture {
   picture Bytes?
   cargo    Cargo?    @relation(fields: [cargoId], references: [id])
   cargoId  String? @default(uuid())
-  type    Type     @default(OTHER)
+  type    String?
+  news News[]
 }
 
-enum Type {
-  MAIN
-  TEXTURE
-  OTHER
+model News {
+  id    String     @default(uuid()) @id
+  title     String?
+  description   String? @db.VarChar(3000)
+  date DateTime @default(now()) @db.Date
+  picture    Picture?    @relation(fields: [pictureId], references: [id])
+  pictureId  String? @default(uuid())
 }

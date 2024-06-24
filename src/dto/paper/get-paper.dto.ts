@@ -13,4 +13,6 @@ export class GetPaperDto {
     readonly categoryId?: string;
     @ApiProperty({example: 'bytea', description: 'picture'})
     readonly picture?: Buffer;
+    @ApiProperty({example: 'number[]', description: 'weights'})
+    readonly weights?: number[];
 }

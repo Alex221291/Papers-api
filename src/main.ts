@@ -1,11 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { LoggingInterceptor } from './logger/logging.interceptor';
 
 async function bootstrap() {
   const PORT = process.env.PORT || 5000;
   const app = await NestFactory.create(AppModule);
 
+  app.useGlobalInterceptors(new LoggingInterceptor());
+  
   const config = new DocumentBuilder()
     .setTitle('Papersd-API')
     .setDescription('The papers API description')

@@ -26,7 +26,7 @@ import { PaperService } from 'src/services/paper.service';
   
     @Post('create')
     @UseInterceptors(FileInterceptor('file'))
-    async createPaper(@UploadedFile() file, @Body() paper: CreatePaperDto) {
+    async createPaper(@UploadedFile() file: Express.Multer.File, @Body() paper: CreatePaperDto) {
       console.log(file);
       const result = await this.paperService.createPaper(file?.path, paper)
       return result;
@@ -34,7 +34,7 @@ import { PaperService } from 'src/services/paper.service';
 
     @Post('update')
     @UseInterceptors(FileInterceptor('file'))
-    async updatePaper(@UploadedFile() file, @Body() paper: UpdatePaperDto) {
+    async updatePaper(@UploadedFile() file: Express.Multer.File, @Body() paper: UpdatePaperDto) {
       console.log(file);
       const result = await this.paperService.updatePaper(file?.path, paper);
       return result;

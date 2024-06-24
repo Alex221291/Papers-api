@@ -107,15 +107,32 @@ export class PaperService {
       where:{categoryId}
     });
 
-    return papers.map(paper =>  {
+    const result= await Promise.all(papers.map(async (paper) => {
       return {
         id: paper?.id,
         name: paper?.name,
         description: paper?.description,
         applicationSphere: paper?.applicationSphere?.split('@#$'),
         categoryId: paper?.categoryId,
-        picture: paper?.picture
-      }
+        picture: paper?.picture,
+        weights: await this.getWeights(paper?.id),
+      };
+    }));
+
+    return result;
+  }
+
+  private async getWeights(paperId?: string): Promise<number[]> { 
+    const uniqueWeights = await this.prisma.cargo.groupBy({
+      by: ['weight'],
+      where: {
+        weight: {
+          not: null, // если вы хотите исключить null значения
+        },
+        paperId
+      },
     });
+    
+    return uniqueWeights.map(entry => entry.weight).sort((a, b) => a - b);
   }
 }
