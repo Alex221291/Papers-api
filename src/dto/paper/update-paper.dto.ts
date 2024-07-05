@@ -11,4 +11,5 @@ export class UpdatePaperDto {
     readonly applicationSphere?: string[];
     @ApiProperty({example: 'bf6792ad-4f20-4134-8373-5b1373ff3588', description: 'categoryId'})
     readonly categoryId?: string;
+    readonly footnote?: string;
 }

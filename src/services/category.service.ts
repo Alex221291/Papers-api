@@ -32,7 +32,8 @@ export class CategoryService {
             description: paper?.description,
             applicationSphere: paper?.applicationSphere?.split('@#$'),
             categoryId: paper?.categoryId,
-            picture: paper?.picture
+            picture: paper?.picture,
+            footnote: paper?.footnote,
           }
         })
       }
