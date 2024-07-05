@@ -27,6 +27,7 @@ model Paper {
   picture Bytes?
   category    Category?    @relation(fields: [categoryId], references: [id])
   categoryId  String? @default(uuid())
+  footnote String? @db.VarChar(1000)
   cargos Cargo[]
 }
 

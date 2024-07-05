@@ -32,6 +32,7 @@ export class PaperService {
         applicationSphere: data?.applicationSphere?.join('@#$'),
         categoryId: data?.categoryId,
         picture: fileData,
+        footnote: data?.footnote,
       },
     });
 
@@ -62,6 +63,7 @@ export class PaperService {
         applicationSphere: data?.applicationSphere?.join('@#$'),
         categoryId: data?.categoryId,
         picture: fileData,
+        footnote: data?.footnote,
       },
     });
 
@@ -98,7 +100,8 @@ export class PaperService {
       description: paper?.description,
       applicationSphere: paper?.applicationSphere?.split('@#$'),
       categoryId: paper?.categoryId,
-      picture: paper?.picture
+      picture: paper?.picture,
+      footnote: paper?.footnote,
     }
   }
 
@@ -116,6 +119,7 @@ export class PaperService {
         categoryId: paper?.categoryId,
         picture: paper?.picture,
         weights: await this.getWeights(paper?.id),
+        footnote: paper?.footnote,
       };
     }));
 

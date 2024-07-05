@@ -15,4 +15,5 @@ export class GetPaperDto {
     readonly picture?: Buffer;
     @ApiProperty({example: 'number[]', description: 'weights'})
     readonly weights?: number[];
+    readonly footnote?: string;
 }

@@ -14,6 +14,7 @@ CREATE TABLE "Paper" (
     "applicationSphere" VARCHAR(1000),
     "picture" BYTEA,
     "categoryId" TEXT,
+    "footnote" VARCHAR(1000),
 
     CONSTRAINT "Paper_pkey" PRIMARY KEY ("id")
 );
