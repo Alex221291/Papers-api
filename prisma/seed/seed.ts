@@ -199,6 +199,73 @@ async function main() {
       type: 'image/jpg'
     }
   });
+  // ВАТМАН
+  // Рисовальный
+  await prisma.picture.updateMany({
+    where: { id: {
+      in: ['e47a0252-aa93-4492-a921-798dd1c9caf5', '98b5db66-9543-4d62-b760-f4dd42ff7cfd', '485f1870-d495-4d56-8a45-756788000900', '9680cb83-5873-440e-a1d8-6e15b98c9211', 'd3b2708c-80a6-4e9d-9051-eff8f79399c6', 'cb9ae9b4-f5ba-4a5d-ae75-c90fbc3a6dd8']
+    }, 
+    picture: null},
+    data: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/vatman/vatman-list-main.jpg')),
+      type: 'image/jpg'
+    }
+  });
+
+  await prisma.picture.updateMany({
+    where: { id: {
+      in: ['e5a3e6e6-2021-41ca-8b3f-08f05343ef0b', '2c7ec73c-555d-43fc-a9f1-e955eac38ca1', 'd2a9d8fa-ff4d-4980-913a-37ef59c1b0e9', '50c3be40-501d-4b2e-b52d-c5c9aefbaf16', 'e437d58a-b278-47d4-bebb-871e7f431668', '77a59296-1736-4854-8bc6-4ed6bd4dc17c']
+    }, 
+    picture: null},
+    data: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/vatman/vatman-ris-texture.jpg')),
+      type: 'image/jpg'
+    }
+  });
+// Чертёжная
+  await prisma.picture.updateMany({
+    where: { id: {
+      in: ['1662f594-7718-43ea-86dd-be5631aa1c44', 'da8c4033-82de-464c-aae5-5eb0da3d3105', 'a760d459-3dac-4967-aa97-9932332ac30c', 'a138a97b-feee-4921-888b-6fa7fe6a0d1c', 'f2babd5f-5d85-483a-a996-93191b7dee7e', 'd9b5f527-896c-4825-af78-05931215f632']
+    }, 
+    picture: null},
+    data: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/vatman/vatman-main.jpg')),
+      type: 'image/jpg'
+    }
+  });
+
+  await prisma.picture.updateMany({
+    where: { id: {
+      in: ['86f2e9f0-f7ec-4ff6-b3b5-d0bae13284a3', '05527000-4f4e-4408-8cd2-9b4d46fb89ad', '3bb315ff-385f-48c3-8bb4-1ee5c78cfc3f']
+    }, 
+    picture: null},
+    data: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/vatman/vatman-list-main.jpg')),
+      type: 'image/jpg'
+    }
+  });
+
+  await prisma.picture.updateMany({
+    where: { id: {
+      in: ['1282cbe0-8007-4ef6-9325-3f4ad66b5d5c', 'e4760a02-dc5e-4b03-a59f-4a38bf1d3b85', '5501d87f-6e9f-4e7b-9abb-469ba3e510d0']
+    }, 
+    picture: null},
+    data: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/vatman/vatman-list-texture.jpg')),
+      type: 'image/jpg'
+    }
+  });
+
+  await prisma.picture.updateMany({
+    where: { id: {
+      in: ['70151d59-cf41-4b4d-8a8c-5dd755c33e05', '13f4c954-83d7-423c-bc23-077d7d812bd3', 'db7a83f2-b5e0-4aaa-bcd5-72f2e159143b', 'cf7c4349-a123-4338-8601-f2d3da413a08', '24003008-b8f3-47b3-af25-3e5414824b9a', '729b8353-2ae4-44b7-a745-80656fce3dc4']
+    }, 
+    picture: null},
+    data: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/vatman/vatman-rulon-texture.jpg')),
+      type: 'image/jpg'
+    }
+  });
 }
 main()
   .then(async () => {
