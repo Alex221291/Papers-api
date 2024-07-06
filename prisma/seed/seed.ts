@@ -44,28 +44,6 @@ async function main() {
     }
   });
 
-  await prisma.picture.updateMany({
-    where: { id: {
-      in: ['f779128e-e838-4688-b750-2ab12e41a7e3', '04f82858-b0c7-4df7-acf7-f7170af9af91', '6b7956cd-7371-483b-97fe-89903abbdb5b', 'f013b7b8-e9dc-404b-8dcf-6bc5b6427360', '13a5e1bc-62e1-4528-a7b3-e86d5a1f0c82', '7c38031d-66df-4bea-bb54-1391b386b095']
-    }, 
-    picture: null},
-    data: {
-      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/kalka-main.png')),
-      type: 'image/png'
-    }
-  });
-
-  await prisma.picture.updateMany({
-    where: { id: {
-      in: ['e6d3054e-df9a-45be-8224-76169e145a6b', 'dce35ff5-89ea-4559-b6af-0a87934870b8', '17493f82-86fa-4b39-b6e2-303b95af9078', '07738281-47b3-48c8-aeda-f9973db7d818', 'b0af73df-d997-4784-a14c-e02a62ceb54c', 'dd7f2cd0-7ef9-498e-8657-c1059727b5a8']
-    }, 
-    picture: null},
-    data: {
-      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/kalka-texture.png')),
-      type: 'image/png'
-    }
-  });
-
   //NEWS
   await prisma.picture.updateMany({
     where: { id: 'b486a497-82aa-419a-9921-b3a567fff653', picture: null },
@@ -263,6 +241,98 @@ async function main() {
     picture: null},
     data: {
       picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/vatman/vatman-rulon-texture.jpg')),
+      type: 'image/jpg'
+    }
+  });
+
+  // KALKA
+  // 40gr
+  await prisma.picture.updateMany({
+    where: { id: {
+      in: ['f779128e-e838-4688-b750-2ab12e41a7e3', '04f82858-b0c7-4df7-acf7-f7170af9af91', '6b7956cd-7371-483b-97fe-89903abbdb5b', 'f013b7b8-e9dc-404b-8dcf-6bc5b6427360', '13a5e1bc-62e1-4528-a7b3-e86d5a1f0c82', '7c38031d-66df-4bea-bb54-1391b386b095', '3959f7e2-0534-43cb-89ac-bd2a4f302c6e', 'ee79c72f-6dc3-4ead-8fcf-bf0fc82c9347']
+    }, 
+    picture: null},
+    data: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/kalka/kalka-main.png')),
+      type: 'image/png'
+    }
+  });
+
+  await prisma.picture.updateMany({
+    where: { id: {
+      in: ['e6d3054e-df9a-45be-8224-76169e145a6b', 'dce35ff5-89ea-4559-b6af-0a87934870b8', '17493f82-86fa-4b39-b6e2-303b95af9078', '07738281-47b3-48c8-aeda-f9973db7d818', 'b0af73df-d997-4784-a14c-e02a62ceb54c', 'dd7f2cd0-7ef9-498e-8657-c1059727b5a8', '189a5f91-1555-4817-b527-952f50353e41', 'a5aec042-cd1f-49d8-a455-36eb407911ee']
+    }, 
+    picture: null},
+    data: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/kalka/kalka-texture.png')),
+      type: 'image/png'
+    }
+  });
+
+    // 52 60 80
+  await prisma.picture.updateMany({
+    where: { id: {
+      in: ['9b789851-220d-46f8-a9ac-0d46298cd51f', 'f3ebcc21-c2f6-4048-9998-8aa2bb5a36ce', '36c8ac0d-7db4-4e59-99fc-3ad4e3071637', 'b37d9dfa-0411-449b-b729-12d41e9b57b6', '043f18a7-1544-4b23-ad82-cabed6503d55', '5f017d81-d833-437d-93cc-34541193a1ef', '42f62ba8-b57e-49ae-bc5c-2b435a0c9abd']
+    }, 
+    picture: null},
+    data: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/kalka/kalka-rem-main.jpg')),
+      type: 'image/jpg'
+    }
+  });
+
+  await prisma.picture.updateMany({
+    where: { id: {
+      in: ['518c5110-ba92-4f2f-8ec8-a0eb3b782a0a', 'a06b5435-71e4-485c-92aa-06ba698c2e5f', '15611917-e974-469d-abc5-b3e65e182679', '1a74e61f-37bd-4bfa-b9b3-e76932e27149', '22e94d7b-2597-4032-b394-f4bba021a62f', '37bfb218-0d7b-4be7-b212-77b65cfcfcbd', '0311bdb0-f3ce-4d44-a8f8-9e83602df92b']
+    }, 
+    picture: null},
+    data: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/kalka/kalka-texture.png')),
+      type: 'image/png'
+    }
+  });
+
+      // для дизайнерских работ
+  await prisma.picture.updateMany({
+    where: { id: {
+      in: ['c69810ec-620d-4edb-9e89-2187de742810']
+    }, 
+    picture: null},
+    data: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/kalka/kalka-main.png')),
+      type: 'image/png'
+    }
+  });
+
+  await prisma.picture.updateMany({
+    where: { id: {
+      in: ['e0d7f23c-9305-4a5d-b402-e90620618e64']
+    }, 
+    picture: null},
+    data: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/kalka/kalka-texture.png')),
+      type: 'image/png'
+    }
+  });
+    // под карандаш
+  await prisma.picture.updateMany({
+    where: { id: {
+      in: ['b8b5f23f-2bdf-4e29-869a-d9844dfd9156', '953dd4ef-aa45-4b80-acf8-8d50e0f24d18', '3881707f-2b7d-40d7-8f68-2622a43e0d85', '44587508-7433-468b-9577-9d478ec610e5', '4b5556ce-5f68-40c2-ab63-e0413691b79e','1647cfc9-59fd-43a3-9a9e-fdc0aa74aa9f']
+    }, 
+    picture: null},
+    data: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/kalka/kalka-main.png')),
+      type: 'image/png'
+    }
+  });
+
+  await prisma.picture.updateMany({
+    where: { id: {
+      in: ['771813a2-813e-4e68-9fc6-b426e988cbd0', 'fdafd849-b34d-4071-8731-26cf1bc76cc8', '32ff8825-256b-4539-b5b0-cdc46f1762a8', '83faa421-aca1-4d4b-9e3f-f757aa7e28a8', 'e6c34bcb-a2bc-4e18-bc74-9e0a490fde7c', '13b22384-543f-435e-901d-549bf4516db1']
+    }, 
+    picture: null},
+    data: {
+      picture: fs.readFileSync(path.join(__dirname, '../seed/seed-pictures/kalka/kalka-pens-texture.jpg')),
       type: 'image/jpg'
     }
   });
