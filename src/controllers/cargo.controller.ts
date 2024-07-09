@@ -7,6 +7,8 @@ import {
     Delete,
     UseInterceptors,
     Query,
+    Header,
+    StreamableFile,
   } from '@nestjs/common';
   import { UploadedFiles } from '@nestjs/common';
   import { FilesInterceptor } from '@nestjs/platform-express';
@@ -16,6 +18,8 @@ import { CreateCargoDto } from 'src/dto/cargo/create-cargo.dto';
 import { GetCargoDto } from 'src/dto/cargo/get-cargo.dto';
 import { UpdateCargoDto } from 'src/dto/cargo/update-cargo.dto';
 import { CargoService } from 'src/services/cargo.service';
+import { createReadStream } from 'fs';
+import { join } from 'path';
   
   @ApiTags('Cargo')
   @Controller('cargo')
@@ -49,6 +53,18 @@ import { CargoService } from 'src/services/cargo.service';
         }
       });
       return await this.cargoService.updateCargo(filesInfo, cargo);
+    }
+
+    @Get('price')
+    @Header('Cache-Control', 'none')
+    async get(): Promise<StreamableFile> {
+      try {
+        console.log(join(process.cwd(), 'uploads', 'tpaper-price.pdf'));
+        const fileStream = createReadStream(join(process.cwd(), 'docs', 'tpaper-price.pdf'));
+        return new StreamableFile(fileStream);
+      } catch (error) {
+        throw new Error('Ошибка при получении файла');
+      }
     }
 
     @Get('weights')

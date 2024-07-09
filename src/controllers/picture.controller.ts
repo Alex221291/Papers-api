@@ -6,7 +6,6 @@ import {
     Param,
   } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { Picture } from '@prisma/client';
 import { PictureService } from 'src/services/picrute.service';
 import * as fs from 'fs';
 import { Readable } from 'stream';
