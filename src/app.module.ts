@@ -13,12 +13,14 @@ import { FileService } from './services/file.service';
 import { AppController } from './controllers/app.controller';
 import { NewsController } from './controllers/news.controller';
 import { NewsService } from './services/news.service';
+import { MailController } from './controllers/mail.controller';
+import { MailService } from './services/mail.service';
 
 @Module({
   imports: [MulterModule.register({
     dest: './uploads',
   }),],
-  controllers: [CategoryController, PaperController, CargoController, PictureController, AppController, NewsController],
-  providers: [CategoryService, PaperService, PrismaService, CargoService, PictureService, FileService, NewsService],
+  controllers: [CategoryController, PaperController, CargoController, PictureController, AppController, NewsController, MailController],
+  providers: [CategoryService, PaperService, PrismaService, CargoService, PictureService, FileService, NewsService, MailService],
 })
 export class AppModule {}
